@@ -2,31 +2,32 @@ import type { GameState } from "./types"
 import { getFruitConfig } from "./get-fruit-config"
 
 export function renderFrame(state: GameState): string {
+  const { score, missCount, maxMiss, fruits, player, field } = state
+  const { width, height } = field
+
   const lifeStr =
-    "♥".repeat(state.maxMiss - state.missCount) + "♡".repeat(state.missCount)
-  const header = ` Score: ${state.score}  ${lifeStr}`
+    "♥".repeat(maxMiss - missCount) + "♡".repeat(missCount)
+  const header = ` Score: ${score}  ${lifeStr}`
 
-  const topBorder = "┌" + "─".repeat(state.field.width) + "┐"
-  const bottomBorder = "└" + "─".repeat(state.field.width) + "┘"
+  const topBorder = "┌" + "─".repeat(width) + "┐"
+  const bottomBorder = "└" + "─".repeat(width) + "┘"
 
-  const playerY = state.field.height - 1
+  const playerY = height - 1
   const playerStr = "[==]"
   const playerWidth = playerStr.length
 
   const rows: string[] = []
-  for (let y = 0; y < state.field.height; y++) {
-    const cellUsed = new Set<number>()
-
+  for (let y = 0; y < height; y++) {
     const items: { x: number; str: string; displayWidth: number }[] = []
 
-    for (const fruit of state.fruits) {
+    for (const fruit of fruits) {
       if (fruit.y === y) {
         items.push({ x: fruit.x, str: getFruitConfig(fruit.kind).emoji, displayWidth: 2 })
       }
     }
 
     if (y === playerY) {
-      items.push({ x: state.player.x, str: playerStr, displayWidth: playerWidth })
+      items.push({ x: player.x, str: playerStr, displayWidth: playerWidth })
     }
 
     items.sort((a, b) => a.x - b.x)
@@ -41,8 +42,8 @@ export function renderFrame(state: GameState): string {
       line += item.str
       col += item.displayWidth
     }
-    if (col < state.field.width) {
-      line += " ".repeat(state.field.width - col)
+    if (col < width) {
+      line += " ".repeat(width - col)
     }
 
     rows.push("│" + line + "│")
