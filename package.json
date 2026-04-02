@@ -1,0 +1,22 @@
+{
+  "name": "fruit-game",
+  "version": "0.1.0",
+  "description": "CLIで動くフルーツキャッチゲーム",
+  "type": "module",
+  "main": "src/index.ts",
+  "bin": {
+    "fruit-game": "src/index.ts"
+  },
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.11",
+    "typescript": "^5.9.3"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@opentui/core": "^0.1.95"
+  }
+}
