@@ -12,11 +12,6 @@ export function renderFrame(state: GameState): string {
   const topBorder = "┌" + "─".repeat(width) + "┐"
   const bottomBorder = "└" + "─".repeat(width) + "┘"
 
-  const fruitMap = new Map<string, string>()
-  for (const fruit of fruits) {
-    fruitMap.set(`${fruit.x},${fruit.y}`, getFruitConfig(fruit.kind).emoji)
-  }
-
   const playerY = height - 1
   const playerStr = "[==]"
   const playerWidth = playerStr.length

@@ -22,4 +22,12 @@ describe("pickFruitKind", () => {
     const result = pickFruitKind(["apple", "orange"])
     expect(["apple", "orange"]).toContain(result)
   })
+
+  test("空配列を渡すとエラーになる", () => {
+    expect(() => pickFruitKind([], 0.5)).toThrow("available must not be empty")
+  })
+
+  test("random=1.0でも最後の要素を返す（境界値）", () => {
+    expect(pickFruitKind(["apple", "orange", "grape"], 1.0)).toBe("grape")
+  })
 })
