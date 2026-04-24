@@ -1,4 +1,4 @@
-import type { GameState } from "./types"
+import type { GameState } from "./types";
 
 export function createInitialState(): GameState {
   return {
@@ -11,5 +11,5 @@ export function createInitialState(): GameState {
     phase: "title",
     frameCount: 0,
     keysHeld: { left: false, right: false },
-  }
+  };
 }
